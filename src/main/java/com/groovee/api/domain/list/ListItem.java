@@ -18,8 +18,6 @@ import java.util.UUID;
 public class ListItem {
     @Id
     @GeneratedValue
-    private UUID id;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false)
     private List list;
