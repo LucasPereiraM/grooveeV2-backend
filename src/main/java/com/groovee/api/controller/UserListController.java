@@ -1,6 +1,5 @@
 package com.groovee.api.controller;
 
-import com.groovee.api.domain.artist.ArtistResponseDTO;
 import com.groovee.api.domain.userList.UserList;
 import com.groovee.api.domain.userList.UserListRequestDTO;
 import com.groovee.api.domain.userList.UserListResponseDTO;
