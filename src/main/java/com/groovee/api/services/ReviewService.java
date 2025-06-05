@@ -1,12 +1,9 @@
 package com.groovee.api.services;
 
-import com.groovee.api.domain.artist.Artist;
-import com.groovee.api.domain.artist.ArtistResponseDTO;
 import com.groovee.api.domain.review.Review;
 import com.groovee.api.domain.review.ReviewRequestDTO;
 import com.groovee.api.domain.review.ReviewResponseDTO;
 import com.groovee.api.domain.user.User;
-import com.groovee.api.repositories.ArtistRepository;
 import com.groovee.api.repositories.ReviewRepository;
 import com.groovee.api.repositories.UserRepository;
 import org.springframework.data.domain.Page;
