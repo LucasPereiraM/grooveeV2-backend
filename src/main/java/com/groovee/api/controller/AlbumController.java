@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import jakarta.validation.Valid;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/album")
@@ -25,5 +26,11 @@ public class AlbumController {
     public ResponseEntity<AlbumResponseDTO> create(@RequestBody @Valid AlbumRequestDTO request) {
         Album album = albumService.CreateAlbum(request);
         return ResponseEntity.ok(new AlbumResponseDTO(album));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<AlbumResponseDTO>> getAlbums(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size){
+        List<AlbumResponseDTO> allAlbums = this.albumService.getAlbums(page, size);
+        return ResponseEntity.ok(allAlbums);
     }
 }

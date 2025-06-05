@@ -1,4 +1,4 @@
-package com.groovee.api.domain.list;
+package com.groovee.api.domain.userList;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -22,7 +22,7 @@ public class ListItem {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false, name = "list_id")
-    private List list;
+    private UserList userList;
 
     @Column(name = "entity_type", nullable = false)
     private String entityType;

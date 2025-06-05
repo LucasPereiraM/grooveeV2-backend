@@ -1,6 +1,6 @@
 package com.groovee.api.repositories;
 
-import com.groovee.api.domain.list.ListItem;
+import com.groovee.api.domain.userList.ListItem;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;

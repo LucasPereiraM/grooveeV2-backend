@@ -1,4 +1,4 @@
-package com.groovee.api.domain.list;
+package com.groovee.api.domain.userList;
 
 import com.groovee.api.domain.user.User;
 import jakarta.persistence.*;
@@ -16,7 +16,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class List {
+    public class UserList {
     @Id
     @GeneratedValue
     private UUID id;
