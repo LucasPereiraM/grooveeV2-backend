@@ -28,8 +28,8 @@ public class Album {
     @Column(name = "release_data")
     private LocalDate releaseDate;
 
+    private String title;
     private String genre;
-
     private String source;
 
     @Column(name = "external_id")

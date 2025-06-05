@@ -9,8 +9,8 @@ import lombok.Setter;
 
 import java.util.UUID;
 
-@Table(name = "track")
 @Entity
+@Table(name = "track")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -25,7 +25,7 @@ public class Track {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "album_id", nullable = false)
-    private Album albumId;
+    private Album album;
 
     private Integer duration;
     private String source;
@@ -33,4 +33,7 @@ public class Track {
     @Column(name = "external_id")
     private String externalId;
 
+    @Version
+    private Integer version;
 }
+

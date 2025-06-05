@@ -1,0 +1,26 @@
+package com.groovee.api.controller;
+
+import com.groovee.api.domain.track.Track;
+import com.groovee.api.domain.track.TrackRequestDTO;
+import com.groovee.api.domain.track.TrackResponseDTO;
+import com.groovee.api.services.TrackService;
+import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/track")
+public class TrackController {
+
+    private final TrackService trackService;
+
+    public TrackController(TrackService trackService) {
+        this.trackService = trackService;
+    }
+
+    @PostMapping
+    public ResponseEntity<TrackResponseDTO> create(@RequestBody @Valid TrackRequestDTO request) {
+        Track track = trackService.createTrack(request);
+        return ResponseEntity.ok(new TrackResponseDTO(track));
+    }
+}
