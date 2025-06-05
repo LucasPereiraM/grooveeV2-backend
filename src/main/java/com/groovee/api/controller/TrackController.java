@@ -1,5 +1,6 @@
 package com.groovee.api.controller;
 
+import com.groovee.api.domain.artist.ArtistResponseDTO;
 import com.groovee.api.domain.track.Track;
 import com.groovee.api.domain.track.TrackRequestDTO;
 import com.groovee.api.domain.track.TrackResponseDTO;
@@ -7,6 +8,8 @@ import com.groovee.api.services.TrackService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/track")
@@ -22,5 +25,11 @@ public class TrackController {
     public ResponseEntity<TrackResponseDTO> create(@RequestBody @Valid TrackRequestDTO request) {
         Track track = trackService.createTrack(request);
         return ResponseEntity.ok(new TrackResponseDTO(track));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<TrackResponseDTO>> getAlbums(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size){
+        List<TrackResponseDTO> allTracks = this.trackService.getTracks(page, size);
+        return ResponseEntity.ok(allTracks);
     }
 }

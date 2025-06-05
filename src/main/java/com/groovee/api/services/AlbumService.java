@@ -2,10 +2,16 @@ package com.groovee.api.services;
 
 import com.groovee.api.domain.album.Album;
 import com.groovee.api.domain.album.AlbumRequestDTO;
+import com.groovee.api.domain.album.AlbumResponseDTO;
 import com.groovee.api.domain.artist.Artist;
 import com.groovee.api.repositories.AlbumRepository;
 import com.groovee.api.repositories.ArtistRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class AlbumService {
@@ -30,5 +36,11 @@ public class AlbumService {
         album.setGenre(data.genre());
 
         return albumRepository.save(album);
+    }
+
+    public List<AlbumResponseDTO> getAlbums(int page, int size){
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Album> albumsPage = this.albumRepository.findAll(pageable);
+        return albumsPage.map(AlbumResponseDTO::new).getContent();
     }
 }

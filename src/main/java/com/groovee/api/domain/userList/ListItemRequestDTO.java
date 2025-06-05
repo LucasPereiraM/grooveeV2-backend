@@ -1,4 +1,4 @@
-package com.groovee.api.domain.list;
+package com.groovee.api.domain.userList;
 
 import java.util.UUID;
 

@@ -1,13 +1,20 @@
 package com.groovee.api.services;
 
+import com.groovee.api.domain.artist.Artist;
+import com.groovee.api.domain.artist.ArtistResponseDTO;
 import com.groovee.api.domain.review.Review;
 import com.groovee.api.domain.review.ReviewRequestDTO;
+import com.groovee.api.domain.review.ReviewResponseDTO;
 import com.groovee.api.domain.user.User;
 import com.groovee.api.repositories.ArtistRepository;
 import com.groovee.api.repositories.ReviewRepository;
 import com.groovee.api.repositories.UserRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -32,5 +39,11 @@ public class ReviewService {
         newReview.setEntityId(data.entityId());
 
         return reviewRepository.save(newReview);
+    }
+
+    public List<ReviewResponseDTO> getReviews(int page, int size){
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Review> reviewsPage = this.reviewRepository.findAll(pageable);
+        return reviewsPage.map(ReviewResponseDTO::new).getContent();
     }
 }

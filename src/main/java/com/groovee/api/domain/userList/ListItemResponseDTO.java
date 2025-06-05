@@ -1,4 +1,4 @@
-package com.groovee.api.domain.list;
+package com.groovee.api.domain.userList;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -13,7 +13,7 @@ public record ListItemResponseDTO(
     public ListItemResponseDTO(ListItem listItem) {
         this(
                 listItem.getId(),
-                listItem.getList().getId(),
+                listItem.getUserList().getId(),
                 listItem.getEntityType(),
                 listItem.getEntityId(),
                 listItem.getAddedAt()
