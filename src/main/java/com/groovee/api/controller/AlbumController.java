@@ -5,8 +5,6 @@ import com.groovee.api.domain.album.AlbumRequestDTO;
 import com.groovee.api.domain.album.AlbumResponseDTO;
 import com.groovee.api.domain.album.AlbumUpdateDTO;
 import com.groovee.api.services.AlbumService;
-import jakarta.persistence.EntityNotFoundException;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestBody;
