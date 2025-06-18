@@ -3,6 +3,7 @@ package com.groovee.api.controller;
 import com.groovee.api.domain.review.Review;
 import com.groovee.api.domain.review.ReviewRequestDTO;
 import com.groovee.api.domain.review.ReviewResponseDTO;
+import com.groovee.api.domain.review.ReviewUpdateDTO;
 import com.groovee.api.services.ReviewService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -34,4 +35,17 @@ public class ReviewController {
         List<ReviewResponseDTO> allReviews = this.reviewService.getReviews(page, size);
         return ResponseEntity.ok(allReviews);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ReviewResponseDTO> updateReview(@PathVariable UUID id, @RequestBody ReviewUpdateDTO dto){
+        ReviewResponseDTO updateReview = reviewService.updateReview(id,dto);
+        return ResponseEntity.ok(updateReview);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ReviewResponseDTO> deleteReview(@PathVariable UUID id){
+        reviewService.deleteReview(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }

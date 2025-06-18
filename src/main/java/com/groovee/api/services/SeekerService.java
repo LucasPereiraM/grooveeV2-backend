@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class SeekerService {
@@ -36,5 +37,11 @@ public class SeekerService {
         Pageable pageable = PageRequest.of(page, size);
         Page<Seeker> seekersPage = this.seekerRepository.findAll(pageable);
         return seekersPage.map(SeekerResponseDTO::new).getContent();
+    }
+
+    public void deleteArtist(UUID id){
+        Seeker seeker = seekerRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("Seeker record not found"));
+        seekerRepository.delete(seeker);
     }
 }

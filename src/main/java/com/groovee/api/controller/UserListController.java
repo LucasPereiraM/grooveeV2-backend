@@ -3,6 +3,7 @@ package com.groovee.api.controller;
 import com.groovee.api.domain.userList.UserList;
 import com.groovee.api.domain.userList.UserListRequestDTO;
 import com.groovee.api.domain.userList.UserListResponseDTO;
+import com.groovee.api.domain.userList.UserListUpdateDTO;
 import com.groovee.api.services.UserListService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -34,5 +35,17 @@ public class UserListController {
     public ResponseEntity<List<UserListResponseDTO>> getLists(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size){
         List<UserListResponseDTO> allLists = this.userListService.getLists(page, size);
         return ResponseEntity.ok(allLists);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<UserList> updateUserList(@PathVariable UUID id, @RequestBody UserListUpdateDTO dto) {
+        UserList updated = userListService.updateUserList(id, dto);
+        return ResponseEntity.ok(updated);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteUserList(@PathVariable UUID id) {
+        userListService.deleteUserList(id);
+        return ResponseEntity.noContent().build();
     }
 }

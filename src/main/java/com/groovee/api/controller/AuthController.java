@@ -1,10 +1,9 @@
 package com.groovee.api.controller;
 
 import com.groovee.api.domain.user.User;
-import com.groovee.api.domain.user.UserResponseDTO;
-import com.groovee.api.dto.LoginRequestDTO;
-import com.groovee.api.dto.RegisterRequestDTO;
-import com.groovee.api.dto.ResponseDTO;
+import com.groovee.api.dto.auth.LoginRequestDTO;
+import com.groovee.api.dto.auth.RegisterRequestDTO;
+import com.groovee.api.dto.auth.ResponseDTO;
 import com.groovee.api.infra.security.TokenService;
 import com.groovee.api.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;

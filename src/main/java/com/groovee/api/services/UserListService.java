@@ -4,6 +4,7 @@ import com.groovee.api.domain.userList.UserList;
 import com.groovee.api.domain.userList.UserListRequestDTO;
 import com.groovee.api.domain.userList.UserListResponseDTO;
 import com.groovee.api.domain.user.User;
+import com.groovee.api.domain.userList.UserListUpdateDTO;
 import com.groovee.api.repositories.ListRepository;
 import com.groovee.api.repositories.UserRepository;
 import org.springframework.data.domain.Page;
@@ -40,5 +41,25 @@ public class UserListService {
         Pageable pageable = PageRequest.of(page,size);
         Page<UserList> listsPage = this.listRepository.findAll(pageable);
         return listsPage.map(UserListResponseDTO::new).getContent();
+    }
+
+    public UserList updateUserList(UUID id, UserListUpdateDTO dto) {
+        UserList userList = listRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("UserList not found"));
+
+        if (dto.getName() != null) {
+            userList.setName(dto.getName());
+        }
+        if (dto.getDescription() != null) {
+            userList.setDescription(dto.getDescription());
+        }
+
+        return listRepository.save(userList);
+    }
+
+    public void deleteUserList(UUID id) {
+        UserList userList = listRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("UserList not found"));
+        listRepository.delete(userList);
     }
 }

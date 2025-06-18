@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/seeker")
@@ -30,5 +31,11 @@ public class SeekerController {
     public ResponseEntity<List<SeekerResponseDTO>> getAlbums(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size){
         List<SeekerResponseDTO> allSeekers = this.seekerService.getSeekers(page, size);
         return ResponseEntity.ok(allSeekers);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<SeekerResponseDTO> deleteSeeker(@PathVariable UUID id){
+        seekerService.deleteArtist(id);
+        return ResponseEntity.noContent().build();
     }
 }

@@ -3,6 +3,7 @@ package com.groovee.api.services;
 import com.groovee.api.domain.album.Album;
 import com.groovee.api.domain.album.AlbumRequestDTO;
 import com.groovee.api.domain.album.AlbumResponseDTO;
+import com.groovee.api.domain.album.AlbumUpdateDTO;
 import com.groovee.api.domain.artist.Artist;
 import com.groovee.api.repositories.AlbumRepository;
 import com.groovee.api.repositories.ArtistRepository;
@@ -12,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class AlbumService {
@@ -22,6 +24,7 @@ public class AlbumService {
         this.albumRepository = albumRepository;
         this.artistRepository = artistRepository;
     }
+
 
     public Album CreateAlbum(AlbumRequestDTO data){
 
@@ -42,5 +45,30 @@ public class AlbumService {
         Pageable pageable = PageRequest.of(page, size);
         Page<Album> albumsPage = this.albumRepository.findAll(pageable);
         return albumsPage.map(AlbumResponseDTO::new).getContent();
+    }
+
+    public AlbumResponseDTO updateAlbum(UUID id, AlbumUpdateDTO dto){
+        Album album = albumRepository.findById(id).orElseThrow(() -> new RuntimeException("Album not found"));
+
+        if(dto.getArtistId() != null){
+            Artist artist = artistRepository.findById(dto.getArtistId()).orElseThrow(() -> new RuntimeException("Artist not found"));
+            album.setArtist(artist);
+        }
+        if(dto.getTitle() != null){
+            album.setTitle(dto.getTitle());
+        }
+        if (dto.getTitle() != null) album.setTitle(dto.getTitle());
+        if (dto.getGenre() != null) album.setGenre(dto.getGenre());
+        if (dto.getSource() != null) album.setSource(dto.getSource());
+        if (dto.getExternalId() != null) album.setExternalId(dto.getExternalId());
+        if (dto.getReleaseDate() != null) album.setReleaseDate(dto.getReleaseDate());
+
+        Album updatedAlbum = albumRepository.save(album);
+        return new AlbumResponseDTO(updatedAlbum);
+    }
+
+    public void deleteAlbum(UUID id){
+        Album album = albumRepository.findById(id).orElseThrow(() -> new RuntimeException("Album not found"));
+        albumRepository.delete(album);
     }
 }
