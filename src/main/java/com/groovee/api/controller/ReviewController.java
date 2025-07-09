@@ -24,6 +24,7 @@ public class ReviewController {
         this.reviewService = reviewService;
     }
 
+    @PostMapping
     public ResponseEntity<ReviewResponseDTO> create(@RequestBody @Valid ReviewRequestDTO request, @AuthenticationPrincipal Jwt jwt){
         UUID userId = UUID.fromString(jwt.getSubject());
         Review review = reviewService.createReview(request, userId);
